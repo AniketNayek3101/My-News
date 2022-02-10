@@ -19,7 +19,11 @@ function getData() {
     fetch(url).then((response) => {
         return response.json();
     }).then((data) => {
-        console.log(data);
+      if (!response.ok) {
+        alert("API not accessible through browser support! Only allowed through local host");
+        throw new Error("API not accessible through browser support! Only allowed through local host");
+      }
+        //console.log(data);
         let articles = data.articles;
         
         articles.forEach(element => {
