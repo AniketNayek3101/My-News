@@ -17,12 +17,13 @@ function getData() {
     let newsHtml = "";
     
     fetch(url).then((response) => {
-        return response.json();
-    }).then((data) => {
       if (!response.ok) {
         alert("API not accessible through browser support! Only allowed through local host");
         throw new Error("API not accessible through browser support! Only allowed through local host");
       }
+        return response.json();
+    }).then((data) => {
+      
         //console.log(data);
         let articles = data.articles;
         
