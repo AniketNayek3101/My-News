@@ -12,7 +12,7 @@ function getData() {
     let date = new Date();
     let urlDate = "";
     urlDate += date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-    let url = `https://newsapi.org/v2/everything?q=Apple&from=${urlDate}&sortBy=popularity&apiKey=${apiKey}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=in&from=${urlDate}&apiKey=${apiKey}`;
     let news = document.getElementById("news");
     let newsHtml = "";
     
@@ -29,7 +29,7 @@ function getData() {
         
         articles.forEach(element => {
 
-        let newsElement = `<div class="p-4 md:w-1/3 sm:mb-0 mb-6">
+        let newsElement = `<div class="p-4 md:w-1/3 sm:mb-0 mb-6 noteCard">
         <div class="rounded-lg h-64 overflow-hidden">
           <img alt="content" class="object-cover object-center h-full w-full" src="${element.urlToImage}">
         </div>
@@ -47,4 +47,20 @@ function getData() {
         });
         news.innerHTML = newsHtml;
     })
+
 }
+
+let search = document.getElementById('searchTxt');
+search.addEventListener("input",function(){
+  let inputVal = search.value.toLowerCase();
+  let notesCard = document.getElementsByClassName('noteCard');
+  Array.from(notesCard).forEach(function(element){
+    let cardTxt = element.getElementsByTagName("h2")[0].innerText;
+    if(cardTxt.includes(inputVal)){
+      element.style.display = "block";
+    }
+    else{
+      element.style.display = "none";
+    }
+  })
+})
